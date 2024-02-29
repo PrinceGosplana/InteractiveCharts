@@ -19,3 +19,11 @@ struct AppDownloads: Identifiable {
     }
 }
 
+extension [AppDownloads] {
+    func findDownloads(_ on: String) -> Double? {
+        if let download = self.first(where: { $0.month == on }) {
+            return download.downloads
+        }
+        return nil
+    }
+}
