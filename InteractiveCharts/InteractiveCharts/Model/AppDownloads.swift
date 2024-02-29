@@ -26,4 +26,11 @@ extension [AppDownloads] {
         }
         return nil
     }
+    
+    func index(_ on: String) -> Int {
+        if let index = self.firstIndex(where: { $0.month == on }) {
+            return index
+        }
+        return 0
+    }
 }
