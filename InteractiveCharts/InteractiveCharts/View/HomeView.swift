@@ -14,9 +14,17 @@ struct HomeView: View {
     var body: some View {
         VStack {
             Picker("", selection: $graphType) {
-                
+                ForEach(GraphType.allCases, id: \.rawValue) { type in
+                    Text(type.rawValue)
+                        .tag(type)
+                }
             }
+            .pickerStyle(.segmented)
+            .labelsHidden()
+            
+            Spacer(minLength: 0)
         }
+        .padding()
     }
 }
 
