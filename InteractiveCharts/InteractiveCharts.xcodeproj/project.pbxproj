@@ -78,6 +78,7 @@
 		950B897D2B903AEE007598D6 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				950B89832B9191A1007598D6 /* GraphType.swift */,
 				950B897E2B903B09007598D6 /* AppDownloads.swift */,
 			);
 			path = Model;
@@ -87,7 +88,6 @@
 			isa = PBXGroup;
 			children = (
 				950B89812B903E14007598D6 /* HomeView.swift */,
-				950B89832B9191A1007598D6 /* GraphType.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
