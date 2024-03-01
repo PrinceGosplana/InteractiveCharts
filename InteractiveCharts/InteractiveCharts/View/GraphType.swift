@@ -7,12 +7,8 @@
 
 import SwiftUI
 
-struct GraphType: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-    }
-}
-
-#Preview {
-    GraphType()
+enum GraphType {
+    case bar
+    case pie
+    case donut
 }
