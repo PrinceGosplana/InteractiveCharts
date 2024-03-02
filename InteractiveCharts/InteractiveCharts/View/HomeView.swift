@@ -5,6 +5,7 @@
 //  Created by OLEKSANDR ISAIEV on 29.02.2024.
 //
 
+import Charts
 import SwiftUI
 
 struct HomeView: View {
@@ -21,6 +22,21 @@ struct HomeView: View {
             }
             .pickerStyle(.segmented)
             .labelsHidden()
+            
+            /// Charts
+            Chart {
+                ForEach(appDownloads) { download in
+                    if graphType == .bar {
+                        /// Bar Chart
+                    } else {
+                        /// New API
+                        /// Pie/Donut Chart
+                        SectorMark(angle: .value("Downloads", download.downloads))
+                    }
+                }
+            }
+            .frame(height: 300)
+            .padding(.top, 15)
             
             Spacer(minLength: 0)
         }

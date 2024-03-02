@@ -49,7 +49,7 @@ extension Date {
     }
 }
 
-var addDownloads: [AppDownloads] = [
+var appDownloads: [AppDownloads] = [
     .init(date: .createDate(1, 1, 2023), downloads: 2500),
     .init(date: .createDate(1, 2, 2023), downloads: 3500),
     .init(date: .createDate(1, 3, 2023), downloads: 1500),
