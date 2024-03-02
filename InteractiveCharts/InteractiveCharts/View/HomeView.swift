@@ -31,7 +31,8 @@ struct HomeView: View {
                     } else {
                         /// New API
                         /// Pie/Donut Chart
-                        SectorMark(angle: .value("Downloads", download.downloads))
+                        SectorMark(angle: .value("Downloads", download.downloads),
+                                   angularInset: 1)
                     }
                 }
             }
