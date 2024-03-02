@@ -32,7 +32,8 @@ struct HomeView: View {
                         /// New API
                         /// Pie/Donut Chart
                         SectorMark(angle: .value("Downloads", download.downloads),
-                                   angularInset: graphType == .donut ? 8 : 1
+                                   innerRadius: .ratio(0.5),
+                                   angularInset: graphType == .donut ? 4 : 1
                         )
                         .cornerRadius(8)
                         .foregroundStyle(by: .value("Month", download.month))
