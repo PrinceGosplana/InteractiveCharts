@@ -55,7 +55,9 @@ struct HomeView: View {
                         .zIndex(-10)
                         .offset(yStart: -10)
                         .annotation(overflowResolution: .init(x: .fit, y: .disabled)) {
-                            
+                            if let downloads = appDownloads.findDownloads(barSelection) {
+                                ChartPopOverView(downloads, barSelection)
+                            }
                         }
                 }
             }
@@ -68,6 +70,27 @@ struct HomeView: View {
             Spacer(minLength: 0)
         }
         .padding()
+    }
+    
+    /// Chart Popover view
+    @ViewBuilder
+    func ChartPopOverView(_ downloads: Double, _ month: String) -> some View {
+        VStack(alignment: .leading, spacing: 6) {
+            Text("App Downloads")
+                .font(.title3)
+                .foregroundStyle(.gray)
+            
+            HStack(spacing: 4) {
+                Text(String(format: "%.0f", downloads))
+                    .font(.title3)
+                    .fontWeight(.semibold)
+                Text(month)
+                    .font(.title3)
+                    .textScale(.secondary)
+            }
+        }
+        .padding()
+        .background(.windowBackground, in: .rect(cornerRadius: 8))
     }
 }
 
