@@ -25,6 +25,9 @@ struct HomeView: View {
             .pickerStyle(.segmented)
             .labelsHidden()
             
+            if let highestDownloads = appDownloads.max(by: { $1.downloads > $0.downloads }) {
+                ChartPopOverView(highestDownloads.downloads, highestDownloads.month)
+            }
             /// Charts
             Chart {
                 ForEach(appDownloads.sorted(by: { graphType == .bar ? false : $0.downloads > $1.downloads })) { download in
