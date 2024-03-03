@@ -51,7 +51,12 @@ struct HomeView: View {
                 
                 if let barSelection {
                     RuleMark(x: .value("Month", barSelection))
+                        .foregroundStyle(.gray.opacity(0.35))
                         .zIndex(-10)
+                        .offset(yStart: -10)
+                        .annotation(overflowResolution: .init(x: .fit, y: .disabled)) {
+                            
+                        }
                 }
             }
             .chartXSelection(value: $barSelection)
