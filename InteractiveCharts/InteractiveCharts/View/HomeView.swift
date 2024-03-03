@@ -48,6 +48,11 @@ struct HomeView: View {
                     }
                         
                 }
+                
+                if let barSelection {
+                    RuleMark(x: .value("Month", barSelection))
+                        .zIndex(-10)
+                }
             }
             .chartXSelection(value: $barSelection)
             .chartLegend(position: .bottom, alignment: graphType == .bar ?.leading : .center, spacing: 25)
