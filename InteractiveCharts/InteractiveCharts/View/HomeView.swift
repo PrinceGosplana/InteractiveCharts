@@ -25,7 +25,7 @@ struct HomeView: View {
             
             /// Charts
             Chart {
-                ForEach(appDownloads) { download in
+                ForEach(appDownloads.sorted(by: { graphType == .bar ? false : $0.downloads > $1.downloads })) { download in
                     if graphType == .bar {
                         /// Bar Chart
                         BarMark(
@@ -50,7 +50,8 @@ struct HomeView: View {
             .chartLegend(position: .bottom, alignment: graphType == .bar ?.leading : .center, spacing: 25)
             .frame(height: 300)
             .padding(.top, 15)
-            
+            /// Adding animation
+            .animation(.snappy, value: graphType)
             Spacer(minLength: 0)
         }
         .padding()
