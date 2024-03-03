@@ -32,6 +32,8 @@ struct HomeView: View {
                             x: .value("Month", download.month),
                             y: .value("Downloads", download.downloads)
                         )
+                        .cornerRadius(8)
+                        .foregroundStyle(by: .value("Month", download.month))
                     } else {
                         /// New API
                         /// Pie/Donut Chart
