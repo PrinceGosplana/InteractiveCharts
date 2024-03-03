@@ -11,6 +11,8 @@ import SwiftUI
 struct HomeView: View {
     /// View Properties
     @State private var graphType: GraphType = .donut
+    /// Chart selection
+    @State private var barSelection: String?
     
     var body: some View {
         VStack {
@@ -47,6 +49,7 @@ struct HomeView: View {
                         
                 }
             }
+            .chartXSelection(value: $barSelection)
             .chartLegend(position: .bottom, alignment: graphType == .bar ?.leading : .center, spacing: 25)
             .frame(height: 300)
             .padding(.top, 15)
