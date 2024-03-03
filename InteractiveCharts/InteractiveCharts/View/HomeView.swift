@@ -54,7 +54,7 @@ struct HomeView: View {
             .frame(height: 300)
             .padding(.top, 15)
             /// Adding animation
-            .animation(.snappy, value: graphType)
+            .animation(graphType == .bar ? .none : .snappy, value: graphType)
             Spacer(minLength: 0)
         }
         .padding()
