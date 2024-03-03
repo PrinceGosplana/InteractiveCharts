@@ -28,6 +28,10 @@ struct HomeView: View {
                 ForEach(appDownloads) { download in
                     if graphType == .bar {
                         /// Bar Chart
+                        BarMark(
+                            x: .value("Month", download.month),
+                            y: .value("Downloads", download.downloads)
+                        )
                     } else {
                         /// New API
                         /// Pie/Donut Chart
