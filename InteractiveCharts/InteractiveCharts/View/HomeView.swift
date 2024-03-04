@@ -27,6 +27,8 @@ struct HomeView: View {
             
             if let highestDownloads = appDownloads.max(by: { $1.downloads > $0.downloads }) {
                 ChartPopOverView(highestDownloads.downloads, highestDownloads.month, true)
+                    .padding(.vertical)
+                    .opacity(barSelection == nil ? 1 : 0)
             }
             /// Charts
             Chart {
