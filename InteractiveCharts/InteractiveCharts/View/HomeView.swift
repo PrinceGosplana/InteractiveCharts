@@ -77,9 +77,9 @@ struct HomeView: View {
     
     /// Chart Popover view
     @ViewBuilder
-    func ChartPopOverView(_ downloads: Double, _ month: String) -> some View {
+    func ChartPopOverView(_ downloads: Double, _ month: String, _ isTitleView: Bool = false) -> some View {
         VStack(alignment: .leading, spacing: 6) {
-            Text("App Downloads")
+            Text("\(isTitleView ? "Highest" : "App") Downloads")
                 .font(.title3)
                 .foregroundStyle(.gray)
             
@@ -92,8 +92,9 @@ struct HomeView: View {
                     .textScale(.secondary)
             }
         }
-        .padding()
-        .background(.windowBackground, in: .rect(cornerRadius: 8))
+        .padding(isTitleView ? [.horizontal] : [.all])
+        .background(Color("PopupColor").opacity(isTitleView ? 0 : 1), in: .rect(cornerRadius: 8))
+        .frame(maxWidth: .infinity, alignment: isTitleView ? .leading : .center)
     }
 }
 
