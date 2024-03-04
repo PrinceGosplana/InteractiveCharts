@@ -13,6 +13,7 @@ struct HomeView: View {
     @State private var graphType: GraphType = .donut
     /// Chart selection
     @State private var barSelection: String?
+    @State private var pieSelection: Double?
     
     var body: some View {
         VStack {
@@ -67,6 +68,7 @@ struct HomeView: View {
                 }
             }
             .chartXSelection(value: $barSelection)
+            .chartAngleSelection(value: $pieSelection)
             .chartLegend(position: .bottom, alignment: graphType == .bar ?.leading : .center, spacing: 25)
             .frame(height: 300)
             .padding(.top, 10)
@@ -75,6 +77,9 @@ struct HomeView: View {
             Spacer(minLength: 0)
         }
         .padding()
+        .onChange(of: pieSelection, initial: false) { oldValue, newValue in
+            
+        }
     }
     
     /// Chart Popover view
