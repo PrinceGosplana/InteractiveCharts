@@ -26,7 +26,7 @@ struct HomeView: View {
             .labelsHidden()
             
             if let highestDownloads = appDownloads.max(by: { $1.downloads > $0.downloads }) {
-                ChartPopOverView(highestDownloads.downloads, highestDownloads.month)
+                ChartPopOverView(highestDownloads.downloads, highestDownloads.month, true)
             }
             /// Charts
             Chart {
@@ -67,7 +67,7 @@ struct HomeView: View {
             .chartXSelection(value: $barSelection)
             .chartLegend(position: .bottom, alignment: graphType == .bar ?.leading : .center, spacing: 25)
             .frame(height: 300)
-            .padding(.top, 15)
+            .padding(.top, 10)
             /// Adding animation
             .animation(graphType == .bar ? .none : .snappy, value: graphType)
             Spacer(minLength: 0)
