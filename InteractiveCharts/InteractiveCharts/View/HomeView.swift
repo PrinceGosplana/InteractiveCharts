@@ -33,7 +33,7 @@ struct HomeView: View {
                             .opacity(barSelection == nil ? 1 : 0)
                     } else {
                         if let barSelection, let selectedDownloads = appDownloads.findDownloads(barSelection) {
-                            ChartPopOverView(selectedDownloads, barSelection, true)
+                            ChartPopOverView(selectedDownloads, barSelection, true, true)
                         } else {
                             ChartPopOverView(highestDownloads.downloads, highestDownloads.month, true)
                         }
@@ -100,9 +100,9 @@ struct HomeView: View {
     
     /// Chart Popover view
     @ViewBuilder
-    func ChartPopOverView(_ downloads: Double, _ month: String, _ isTitleView: Bool = false) -> some View {
+    func ChartPopOverView(_ downloads: Double, _ month: String, _ isTitleView: Bool = false, _ isSelection: Bool = false) -> some View {
         VStack(alignment: .leading, spacing: 6) {
-            Text("\(isTitleView ? "Highest" : "App") Downloads")
+            Text("\(isTitleView && !isSelection ? "Highest" : "App") Downloads")
                 .font(.title3)
                 .foregroundStyle(.gray)
             
