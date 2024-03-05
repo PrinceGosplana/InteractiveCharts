@@ -51,6 +51,8 @@ struct HomeView: View {
                         )
                         .cornerRadius(8)
                         .foregroundStyle(by: .value("Month", download.month))
+                        /// Fading out all other content, exepct for the current selection
+                        .opacity(barSelection == nil ? 1 : (barSelection == download.month ? 1 : 0.4))
                     }
                         
                 }
