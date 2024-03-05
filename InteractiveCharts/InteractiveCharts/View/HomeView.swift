@@ -34,12 +34,8 @@ struct HomeView: View {
                     } else {
                         if let barSelection, let selectedDownloads = appDownloads.findDownloads(barSelection) {
                             ChartPopOverView(selectedDownloads, barSelection, true)
-                                .padding(.vertical)
-                                .opacity(barSelection == nil ? 1 : 0)
                         } else {
                             ChartPopOverView(highestDownloads.downloads, highestDownloads.month, true)
-                                .padding(.vertical)
-                                .opacity(barSelection == nil ? 1 : 0)
                         }
                     }
                 }
