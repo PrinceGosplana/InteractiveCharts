@@ -78,7 +78,11 @@ struct HomeView: View {
         }
         .padding()
         .onChange(of: pieSelection, initial: false) { oldValue, newValue in
-            
+            if let newValue {
+                findDownload(newValue)
+            } else {
+                barSelection = nil
+            }
         }
     }
     
@@ -102,6 +106,27 @@ struct HomeView: View {
         .padding(isTitleView ? [.horizontal] : [.all])
         .background(Color("PopupColor").opacity(isTitleView ? 0 : 1), in: .rect(cornerRadius: 8))
         .frame(maxWidth: .infinity, alignment: isTitleView ? .leading : .center)
+    }
+    
+    func findDownload(_ rangeValue: Double) {
+        /// Converting Download Model into Array of Tuples
+        var initialValue: Double = 0.0
+        
+        let convertedArray = appDownloads.compactMap { download -> (String, Range<Double>) in
+            let rangeEnd = initialValue + download.downloads
+            let tuple = (download.month, initialValue..<rangeEnd)
+            /// Updating initial value for next iteraction
+            initialValue = rangeEnd
+            return tuple
+        }
+        
+        /// now finding the value lies in the range
+        if let download = convertedArray.first(where: {
+            $0.1.contains(rangeValue)
+        }) {
+            /// updating selection
+            barSelection = download.0
+        }
     }
 }
 
