@@ -26,23 +26,25 @@ struct HomeView: View {
             .pickerStyle(.segmented)
             .labelsHidden()
             
-            if let highestDownloads = appDownloads.max(by: { $1.downloads > $0.downloads }) {
-                if graphType == .bar {
-                    ChartPopOverView(highestDownloads.downloads, highestDownloads.month, true)
-                        .padding(.vertical)
-                        .opacity(barSelection == nil ? 1 : 0)
-                } else {
-                    if let barSelection, let selectedDownloads = appDownloads.findDownloads(barSelection) {
-                        ChartPopOverView(selectedDownloads, barSelection, true)
-                            .padding(.vertical)
+            ZStack {
+                if let highestDownloads = appDownloads.max(by: { $1.downloads > $0.downloads }) {
+                    if graphType == .bar {
+                        ChartPopOverView(highestDownloads.downloads, highestDownloads.month, true)
                             .opacity(barSelection == nil ? 1 : 0)
                     } else {
-                        ChartPopOverView(highestDownloads.downloads, highestDownloads.month, true)
-                            .padding(.vertical)
-                            .opacity(barSelection == nil ? 1 : 0)
+                        if let barSelection, let selectedDownloads = appDownloads.findDownloads(barSelection) {
+                            ChartPopOverView(selectedDownloads, barSelection, true)
+                                .padding(.vertical)
+                                .opacity(barSelection == nil ? 1 : 0)
+                        } else {
+                            ChartPopOverView(highestDownloads.downloads, highestDownloads.month, true)
+                                .padding(.vertical)
+                                .opacity(barSelection == nil ? 1 : 0)
+                        }
                     }
                 }
             }
+            .padding(.vertical)
             /// Charts
             Chart {
                 ForEach(appDownloads.sorted(by: { graphType == .bar ? false : $0.downloads > $1.downloads })) { download in
@@ -66,7 +68,7 @@ struct HomeView: View {
                         /// Fading out all other content, exepct for the current selection
                         .opacity(barSelection == nil ? 1 : (barSelection == download.month ? 1 : 0.4))
                     }
-                        
+                    
                 }
                 
                 if let barSelection {
@@ -129,12 +131,12 @@ struct HomeView: View {
         let convertedArray = appDownloads
             .sorted(by: { $0.downloads > $1.downloads })
             .compactMap { download -> (String, Range<Double>) in
-            let rangeEnd = initialValue + download.downloads
-            let tuple = (download.month, initialValue..<rangeEnd)
-            /// Updating initial value for next iteraction
-            initialValue = rangeEnd
-            return tuple
-        }
+                let rangeEnd = initialValue + download.downloads
+                let tuple = (download.month, initialValue..<rangeEnd)
+                /// Updating initial value for next iteraction
+                initialValue = rangeEnd
+                return tuple
+            }
         
         /// now finding the value lies in the range
         if let download = convertedArray.first(where: {
