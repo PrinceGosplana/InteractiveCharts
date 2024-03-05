@@ -114,7 +114,9 @@ struct HomeView: View {
         /// Converting Download Model into Array of Tuples
         var initialValue: Double = 0.0
         
-        let convertedArray = appDownloads.compactMap { download -> (String, Range<Double>) in
+        let convertedArray = appDownloads
+            .sorted(by: { $0.downloads > $1.downloads })
+            .compactMap { download -> (String, Range<Double>) in
             let rangeEnd = initialValue + download.downloads
             let tuple = (download.month, initialValue..<rangeEnd)
             /// Updating initial value for next iteraction
