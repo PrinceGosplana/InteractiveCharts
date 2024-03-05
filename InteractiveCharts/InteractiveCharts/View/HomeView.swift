@@ -27,9 +27,21 @@ struct HomeView: View {
             .labelsHidden()
             
             if let highestDownloads = appDownloads.max(by: { $1.downloads > $0.downloads }) {
-                ChartPopOverView(highestDownloads.downloads, highestDownloads.month, true)
-                    .padding(.vertical)
-                    .opacity(barSelection == nil ? 1 : 0)
+                if graphType == .bar {
+                    ChartPopOverView(highestDownloads.downloads, highestDownloads.month, true)
+                        .padding(.vertical)
+                        .opacity(barSelection == nil ? 1 : 0)
+                } else {
+                    if let barSelection, let selectedDownloads = appDownloads.findDownloads(barSelection) {
+                        ChartPopOverView(selectedDownloads, barSelection, true)
+                            .padding(.vertical)
+                            .opacity(barSelection == nil ? 1 : 0)
+                    } else {
+                        ChartPopOverView(highestDownloads.downloads, highestDownloads.month, true)
+                            .padding(.vertical)
+                            .opacity(barSelection == nil ? 1 : 0)
+                    }
+                }
             }
             /// Charts
             Chart {
